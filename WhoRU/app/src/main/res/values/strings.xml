@@ -2,14 +2,13 @@
     <string name="app_name">WhoRU</string>
     <string name="action_settings">Settings</string>
     // Appintro strings
-    <string name="appintro_welcome"></string>
-    <string name="appintro_title1"></string>
-    <string name="appintro_description1"></string>
-    <string name="appintro_title2"></string>
-    <string name="appintro_description2"></string>
-    <string name="appintro_title3"></string>
-    <string name="appintro_description3"></string>
-    <string name="appintro_title4"></string>
-    <string name="appintro_description4"></string>
+    <string name="appintro_title1">WhoRU</string>
+    <string name="appintro_description1">EZGG</string>
+    <string name="appintro_title2">It\'s easy</string>
+    <string name="appintro_description2">Just press central button to identify someone.</string>
+    <string name="appintro_title3">We need your camera</string>
+    <string name="appintro_description3">Our app will take images to identify people.</string>
+    <string name="appintro_title4">That\'s all</string>
+    <string name="appintro_description4">Easy? Yes it is.</string>
 
 </resources>
