@@ -1,4 +1,15 @@
 <resources>
     <string name="app_name">WhoRU</string>
     <string name="action_settings">Settings</string>
+    // Appintro strings
+    <string name="appintro_welcome"></string>
+    <string name="appintro_title1"></string>
+    <string name="appintro_description1"></string>
+    <string name="appintro_title2"></string>
+    <string name="appintro_description2"></string>
+    <string name="appintro_title3"></string>
+    <string name="appintro_description3"></string>
+    <string name="appintro_title4"></string>
+    <string name="appintro_description4"></string>
+
 </resources>
