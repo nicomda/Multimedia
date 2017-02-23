@@ -10,5 +10,6 @@
     <string name="appintro_description3">Our app will take images to identify people.</string>
     <string name="appintro_title4">That\'s all</string>
     <string name="appintro_description4">Easy? Yes it is.</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

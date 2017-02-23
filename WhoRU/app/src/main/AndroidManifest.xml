@@ -20,8 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".IntroActivity"
-        android:label="Tutorial"/>
+        <activity
+            android:name=".IntroActivity"
+            android:label="Tutorial" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="@string/title_activity_profile"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>
