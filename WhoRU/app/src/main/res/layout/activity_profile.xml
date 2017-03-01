@@ -10,6 +10,7 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
         android:theme="@style/AppTheme.AppBarOverlay">
 
         <android.support.design.widget.CollapsingToolbarLayout
@@ -18,23 +19,57 @@
             android:layout_height="match_parent"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="@color/colorAccent"
+            app:expandedTitleGravity="center_horizontal|bottom"
+            app:expandedTitleMarginBottom="20dp">
 
-            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:fitsSystemWindows="true"
+                android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                app:srcCompat="@color/colorAccent"
-                android:id="@+id/profileBackground"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.5" />
+                <ImageButton
+                    android:id="@+id/header_cover_image"
+                    android:layout_width="match_parent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/uja_logo_320"
+                    android:layout_height="150dp"
+                    android:paddingTop="28dp"
+                    android:paddingBottom="72dp"
+                    android:background="@color/colorAccent"/>
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/user_profile_photo"
+                    android:layout_width="180dp"
+                    android:layout_height="180dp"
+                    android:layout_below="@+id/header_cover_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="-90dp"
+                    android:elevation="5dp"
+                    android:padding="20dp"
+                    android:src="@drawable/uja_logo_320"
+                    app:civ_border_color="@android:color/white"
+                    app:civ_border_width="2dp"/>
+
+
+                <RelativeLayout
+                    android:id="@+id/profile_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_below="@+id/header_cover_image"
+                    android:background="@color/colorPrimary"
+                    android:elevation="4dp"
+                    android:paddingBottom="24dp">
+
+
+
+
+                </RelativeLayout>
+            </RelativeLayout>
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary"
-                app:popupTheme="@style/AppTheme.PopupOverlay" />
+                android:minHeight="?attr/actionBarSize"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
 
@@ -46,19 +81,10 @@
         android:layout_width="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <TextView
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum magna justo, congue nec ante non, interdum aliquam dolor. Sed malesuada dui vitae massa tristique, ut ornare quam sollicitudin. Proin egestas, velit et bibendum sagittis, risus lorem viverra dolor, a aliquam ipsum leo sit amet ante. Nullam ut ex in magna faucibus fermentum quis faucibus urna. Aliquam ut neque orci. Cras tincidunt tristique justo a dictum. Pellentesque ultrices neque neque, ut elementum tortor malesuada non. Phasellus consequat urna at felis volutpat, convallis commodo sapien vulputate. Maecenas ut imperdiet erat, ut facilisis mi. Curabitur a neque blandit, malesuada orci sit amet, faucibus mauris. Nullam finibus felis lorem, ac feugiat dolor molestie sit amet. Proin sapien enim, varius et orci quis, pulvinar porta metus. Morbi imperdiet risus quis efficitur facilisis. Suspendisse auctor dolor iaculis diam gravida, tempor placerat mauris pellentesque.
-
-Vestibulum varius tortor pellentesque metus vulputate, non interdum quam vehicula. Interdum et malesuada fames ac ante ipsum primis in faucibus. Suspendisse id quam et sapien sollicitudin interdum. Vestibulum lobortis vitae mi quis dignissim. Suspendisse molestie quam elit. Suspendisse tempor odio mauris, nec fringilla tortor pellentesque in. Duis mauris neque, finibus ut nulla a, efficitur laoreet ipsum. Proin mattis risus quis diam lobortis tincidunt.
-
-Nunc non diam libero. Vivamus consectetur bibendum leo quis vehicula. Vestibulum ultricies neque eget efficitur tincidunt. Nunc lobortis imperdiet odio vel pulvinar. Morbi id orci et nisi placerat laoreet. Mauris vehicula facilisis sapien in viverra. Ut nec tellus sit amet elit varius hendrerit ut vitae felis. Sed rutrum dictum dapibus. Quisque dignissim ornare egestas. Nam quis sem at turpis mattis pulvinar. Mauris convallis mi scelerisque, efficitur erat et, vestibulum velit. Sed ornare ac nulla condimentum malesuada. Morbi cursus dictum dignissim. Proin non luctus purus.
-
-Phasellus placerat sit amet nibh sit amet malesuada. Pellentesque nec nulla nunc. Vivamus ornare sapien in quam tempor, eget malesuada odio facilisis. Duis nec ultrices urna, at posuere leo. Ut mollis hendrerit sapien et mollis. Curabitur eu molestie elit. Cras erat lorem, convallis non porta sed, ullamcorper aliquam dui. Fusce vel lacus non dui interdum fermentum. Nulla facilisi.
-
-Etiam fringilla, nulla id ullamcorper interdum, velit lorem lobortis risus, sit amet aliquet quam lorem convallis arcu. Maecenas fermentum sed ex volutpat porttitor. Nullam id est massa. Integer ultrices, justo id gravida luctus, ex felis pulvinar sem, eget suscipit nunc enim at risus. Phasellus risus massa, convallis at posuere sed, pharetra ut dolor. Nam vel nunc vitae ante ullamcorper aliquam. Vestibulum id elit neque. Morbi gravida metus posuere accumsan congue. Fusce in sem augue. Nulla malesuada dui lacus. Cras tempus eros dolor, pretium molestie lacus fringilla eleifend. Nulla condimentum feugiat rutrum. Suspendisse maximus tristique dolor et lacinia. Aliquam et dui enim. Cras rutrum est eget magna sollicitudin, nec imperdiet elit faucibus. Suspendisse potenti."
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/profile_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/textView5" />
+            android:layout_height="wrap_content" />
     </android.support.v4.widget.NestedScrollView>
 
 
