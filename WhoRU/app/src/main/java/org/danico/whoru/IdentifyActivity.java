@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -18,8 +17,8 @@ import com.google.android.cameraview.CameraView;
 
 public class IdentifyActivity extends AppCompatActivity {
 
-    private FloatingActionButton fab;
     private CameraView camera;
+    private ImageView button_recon;
     private ImageView button_camera_flip;
     private ImageView button_camera_flash;
     private final int PERMISSION_REQUEST_CAMERA = 1;
@@ -67,8 +66,8 @@ public class IdentifyActivity extends AppCompatActivity {
     public void setUpButtonsListeners() {
 
         //FAB Shoot camera listener
-        fab = (FloatingActionButton) findViewById(R.id.identify_fab_capture);
-        fab.setOnClickListener(new View.OnClickListener() {
+        button_recon = (ImageView) findViewById(R.id.identify_capture);
+        button_recon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
@@ -93,13 +92,13 @@ public class IdentifyActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (camera.getFlash() == CameraView.FLASH_ON) {
                     camera.setFlash(CameraView.FLASH_OFF);
-                    button_camera_flash.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera_flash_disabled));
+                    button_camera_flash.setImageDrawable(getResources().getDrawable(R.drawable.flash_disabled));
                 } else if (camera.getFlash() == CameraView.FLASH_OFF) {
                     camera.setFlash(CameraView.FLASH_AUTO);
-                    button_camera_flash.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera_flash_auto));
+                    button_camera_flash.setImageDrawable(getResources().getDrawable(R.drawable.flash_auto));
                 } else {
                     camera.setFlash(CameraView.FLASH_ON);
-                    button_camera_flash.setImageDrawable(getResources().getDrawable(R.drawable.ic_menu_camera_flash_enabled));
+                    button_camera_flash.setImageDrawable(getResources().getDrawable(R.drawable.flash_enabled));
                 }
             }
         });
