@@ -126,7 +126,7 @@ public class IdentifyActivity extends AppCompatActivity {
 
                 //right to left swipe
                 if (x1 > x2) {
-                    //TODO Starting profile on right swipe. This must change to search activity rather than profile
+                    //TODO Starting profile on right swipe. This must change to search activity rather than profile.
                     Intent i = new Intent(this, ProfileActivity.class);
                     startActivity(i);
                 }

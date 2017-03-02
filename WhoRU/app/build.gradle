@@ -37,6 +37,4 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     //CameraView
     compile 'com.github.google:cameraview:a9d1eb9bad'
-    //Swipe Listeners
-    compile 'com.github.pwittchen:swipe:0.0.1'
 }
