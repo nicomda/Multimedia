@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -22,6 +23,7 @@ public class IdentifyActivity extends AppCompatActivity {
     private ImageView button_camera_flip;
     private ImageView button_camera_flash;
     private final int PERMISSION_REQUEST_CAMERA = 1;
+    private float x1, x2, y1, y2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,8 +72,6 @@ public class IdentifyActivity extends AppCompatActivity {
         button_recon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getApplicationContext(), ProfileActivity.class);
-                startActivity(i);
             }
         });
 
@@ -104,6 +104,37 @@ public class IdentifyActivity extends AppCompatActivity {
         });
     }
 
+    //To control swipes on the activity
+    public boolean onTouchEvent(MotionEvent touchevent) {
+        switch (touchevent.getAction()) {
+            // When user first touches the screen we get x and y coordinate
+            case MotionEvent.ACTION_DOWN: {
+                x1 = touchevent.getX();
+                y1 = touchevent.getY();
+                break;
+            }
+            case MotionEvent.ACTION_UP: {
+                x2 = touchevent.getX();
+                y2 = touchevent.getY();
+            /*By default, MotionEvent let me get ACTION_DOWN and ACTION_UP gestures,
+            but that lets me get coordinates in 2 points so, i did the trick to avoid ViewPager*/
+
+                //left to right swipe
+                if (x1 < x2) {
+                    //Not using this at the moment
+                }
+
+                //right to left swipe
+                if (x1 > x2) {
+                    //TODO Starting profile on right swipe. This must change to search activity rather than profile
+                    Intent i = new Intent(this, ProfileActivity.class);
+                    startActivity(i);
+                }
+            }
+        }
+        return false;
+    }
+
     public void askForCameraPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, PERMISSION_REQUEST_CAMERA);
@@ -127,4 +158,5 @@ public class IdentifyActivity extends AppCompatActivity {
             }
         }
     }
+
 }
