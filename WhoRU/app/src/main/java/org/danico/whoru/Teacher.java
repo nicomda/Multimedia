@@ -13,8 +13,9 @@ import io.realm.annotations.PrimaryKey;
  */
 
 public class Teacher extends RealmObject {
+    public static final String ID = "id", NAME = "name", FAV = "fav";
     @PrimaryKey
-    private String id;
+    public String id;
     private String name;
     private String department;
     private String office;
