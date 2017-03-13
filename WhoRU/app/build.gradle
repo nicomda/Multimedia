@@ -40,5 +40,6 @@ dependencies {
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.github.google:cameraview:a9d1eb9bad'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'io.realm:android-adapters:2.0.0'
     testCompile 'junit:junit:4.12'
 }

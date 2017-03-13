@@ -2,6 +2,8 @@ package org.danico.whoru;
 
 import android.content.res.Resources;
 
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
@@ -39,8 +41,22 @@ public class Database {
     public Teacher getTeacher(String id) {
         realm.beginTransaction();
         RealmResults<Teacher> realmResults = realm.where(Teacher.class).equalTo(Teacher.ID, id).findAll();
+        realm.commitTransaction();
         return realmResults.get(1);
 
+    }
+
+    public ArrayList<Teacher> getAllTeacher() {
+        ArrayList<Teacher> teachers = new ArrayList<>();
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+
+            }
+        });
+        RealmResults<Teacher> realmResults = realm.where(Teacher.class).findAll();
+        teachers.addAll(realm.copyFromRealm(realmResults));
+        return teachers;
     }
 
 

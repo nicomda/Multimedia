@@ -13,14 +13,15 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 
 public class SearchFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<String> mDataset;
-
+    private Realm realm;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -34,17 +35,7 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDataset=new ArrayList<>();
-        mDataset.add("Twitter");
-        mDataset.add("Website");
-        mDataset.add("Mail");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -52,12 +43,8 @@ public class SearchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_search, container, false);
-        mRecyclerView=(RecyclerView)rootView.findViewById(R.id.recyclerview_search);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager=new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter=new SearchRecyclerViewAdapter(mDataset);
-        mRecyclerView.setAdapter(mAdapter);
+        setUpRecyclerView(rootView);
+
         return rootView;
     }
     // TODO: Rename method, update argument and hook method into UI event
@@ -87,5 +74,14 @@ public class SearchFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    private void setUpRecyclerView(View rootView) {
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerview_search);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(getContext());
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new SearchRecyclerViewAdapter(this, realm.where(Teacher.class).findAll());
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

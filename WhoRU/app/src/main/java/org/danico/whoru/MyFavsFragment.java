@@ -13,13 +13,15 @@ import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+
 
 public class MyFavsFragment extends Fragment {
     private OnFragmentInteractionListener mListener;
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<String> mDataset;
+    private Realm realm;
 
 
     public MyFavsFragment() {
@@ -35,17 +37,7 @@ public class MyFavsFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mDataset=new ArrayList<>();
-        mDataset.add("Twitter");
-        mDataset.add("Website");
-        mDataset.add("Mail");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
-        mDataset.add("1");
+        realm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -57,7 +49,7 @@ public class MyFavsFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager=new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter=new SearchRecyclerViewAdapter(mDataset);
+        mAdapter = new MyFavsRecyclerViewAdapter(this, realm.where(Teacher.class).equalTo(Teacher.FAV, true).findAll());
         mRecyclerView.setAdapter(mAdapter);
         return rootView;
     }

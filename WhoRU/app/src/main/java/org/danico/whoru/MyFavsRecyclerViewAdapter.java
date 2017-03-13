@@ -10,28 +10,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.realm.RealmCollection;
+import io.realm.RealmRecyclerViewAdapter;
+import io.realm.RealmResults;
+
 /**
  * Created by nicomda on 1/3/17.
  */
 
-public class MyFavsRecyclerViewAdapter extends RecyclerView.Adapter<MyFavsRecyclerViewAdapter.ViewHolder> {
+public class MyFavsRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher, MyFavsRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<String> mDataset;
+    private final MyFavsFragment fragment;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView cardText;
-        public ImageView cardImage;
-
-        public ViewHolder(View v) {
-            super(v);
-            cardText=(TextView) v.findViewById(R.id.cardview_search_name);
-            cardImage=(ImageView) v.findViewById(R.id.cardView_search_image);
-        }
-    }
-
-    public MyFavsRecyclerViewAdapter(ArrayList<String> myDataset) {
-        mDataset = myDataset;
+    public MyFavsRecyclerViewAdapter(MyFavsFragment fragment, RealmResults<Teacher> data) {
+        super(data, true);
+        this.fragment = fragment;
     }
 
     @Override
@@ -43,17 +36,24 @@ public class MyFavsRecyclerViewAdapter extends RecyclerView.Adapter<MyFavsRecycl
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.cardText.setText(mDataset.get(position));
-        holder.cardText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,mDataset.get(position),Snackbar.LENGTH_SHORT).show();
-            }
-        });
+        Teacher obj = getData().get(position);
+        holder.cardText.setText(obj.getName());
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return getData().size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView cardText;
+        public ImageView cardImage;
+
+        public ViewHolder(View v) {
+            super(v);
+            cardText = (TextView) v.findViewById(R.id.cardview_search_name);
+            cardImage = (ImageView) v.findViewById(R.id.cardView_search_image);
+        }
     }
 }

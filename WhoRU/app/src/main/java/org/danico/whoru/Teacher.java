@@ -37,7 +37,6 @@ public class Teacher extends RealmObject {
         additional_info = this.additional_info;
         fav = false;
         setImage(bitmapToByteArray(bm));
-
     }
 
     public Teacher(Teacher teacher) {
@@ -51,6 +50,10 @@ public class Teacher extends RealmObject {
         additional_info = teacher.getAdditional_info();
         fav = teacher.isFav();
         image = teacher.getImage();
+    }
+
+    public Teacher() {
+
     }
 
     private byte[] bitmapToByteArray(Bitmap bm) {

@@ -82,6 +82,10 @@ public class FaceRecognitionFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
