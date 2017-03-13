@@ -1,14 +1,19 @@
 package org.danico.whoru;
 
+import android.graphics.Bitmap;
+
+import java.io.ByteArrayOutputStream;
 import java.util.UUID;
 
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by dcc00030 on 09/03/2017.
  */
 
 public class Teacher extends RealmObject {
+    @PrimaryKey
     private String id;
     private String name;
     private String department;
@@ -17,32 +22,43 @@ public class Teacher extends RealmObject {
     private String web;
     private String email;
     private String additional_info;
-    private boolean fav;
+    private Boolean fav;
+    private byte[] image;
 
-    public Teacher(String _name, String _department, String _office, String _email, String _twitter, String _web, String _additional_info, boolean _fav) {
+    public Teacher(String name, String department, String office, String email, String twitter, String web, String additional_info, Boolean fav, Bitmap bm) {
         id = "T-" + UUID.randomUUID().toString();
-        name = _name;
-        department = _department;
-        office = _office;
-        email = _email;
-        twitter = _twitter;
-        web = _web;
-        additional_info = _additional_info;
+        name = this.name;
+        department = this.department;
+        office = this.office;
+        email = this.email;
+        twitter = this.twitter;
+        web = this.web;
+        additional_info = this.additional_info;
         fav = false;
-    }
-
-    public Teacher(Teacher _teacher) {
-        id = _teacher.getId();
-        name = _teacher.getName();
-        department = _teacher.getDepartment();
-        office = _teacher.getOffice();
-        twitter = _teacher.getTwitter();
-        web = _teacher.getWeb();
-        email = _teacher.getEmail();
-        additional_info = _teacher.getAdditional_info();
-        fav = _teacher.isFav();
+        setImage(bitmapToByteArray(bm));
 
     }
+
+    public Teacher(Teacher teacher) {
+        id = teacher.getId();
+        name = teacher.getName();
+        department = teacher.getDepartment();
+        office = teacher.getOffice();
+        twitter = teacher.getTwitter();
+        web = teacher.getWeb();
+        email = teacher.getEmail();
+        additional_info = teacher.getAdditional_info();
+        fav = teacher.isFav();
+        image = teacher.getImage();
+    }
+
+    private byte[] bitmapToByteArray(Bitmap bm) {
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        return byteArray;
+    }
+
 
 
     public String getId() {
@@ -105,11 +121,19 @@ public class Teacher extends RealmObject {
         this.additional_info = additional_info;
     }
 
-    public boolean isFav() {
+    public Boolean isFav() {
         return fav;
     }
 
-    public void setFav(boolean fav) {
+    public void setFav(Boolean fav) {
         this.fav = fav;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
     }
 }
