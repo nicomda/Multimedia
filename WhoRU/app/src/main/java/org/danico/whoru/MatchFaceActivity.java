@@ -1,15 +1,15 @@
 package org.danico.whoru;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
+
+import io.realm.Realm;
 
 public class MatchFaceActivity extends AppCompatActivity {
 
@@ -18,28 +18,14 @@ public class MatchFaceActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    private ArrayList<String> mDataset;
+    private Realm realm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match_face);
-
-
-        mRecyclerView=(RecyclerView) findViewById(R.id.recyclerview_matchface);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager=new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mDataset=new ArrayList<>();
-        mDataset.add("Twitter");
-        mDataset.add("Facebook");
-        mDataset.add("Youtube");
-        mDataset.add("Facebook");
-        mDataset.add("Youtube");
-        mDataset.add("Facebook");
-        mDataset.add("Youtube");
-        mAdapter=new MatchFaceRecyclerViewAdapter(mDataset);
-        mRecyclerView.setAdapter(mAdapter);
+        realm = Realm.getDefaultInstance();
+        setUpRecyclerView();
 
     }
 
@@ -59,5 +45,15 @@ public class MatchFaceActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void setUpRecyclerView() {
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_matchface);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        //TODO Modify query here to get just 1 teacher to show on RecyclerView
+        mAdapter = new MatchFaceRecyclerViewAdapter(this, realm.where(Teacher.class).findAll());
+        mRecyclerView.setAdapter(mAdapter);
     }
 }

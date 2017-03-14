@@ -10,30 +10,21 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import io.realm.RealmRecyclerViewAdapter;
+import io.realm.RealmResults;
+
 /**
  * Created by nicomda on 1/3/17.
  */
 
-public class MatchFaceRecyclerViewAdapter extends RecyclerView.Adapter<MatchFaceRecyclerViewAdapter.ViewHolder> {
+public class MatchFaceRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher, MatchFaceRecyclerViewAdapter.ViewHolder> {
 
-    private ArrayList<String> mDataset;
+    private final MatchFaceActivity activity;
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        // each data item is just a string in this case
-        public TextView cardText1;
-        public ImageView cardImage;
-        public ImageView cardShare;
 
-        public ViewHolder(View v) {
-            super(v);
-            cardText1=(TextView) v.findViewById(R.id.profile_card_text1);
-            cardImage=(ImageView) v.findViewById(R.id.profile_card_img);
-            cardShare=(ImageView) v.findViewById(R.id.profile_card_share);
-        }
-    }
-
-    public MatchFaceRecyclerViewAdapter(ArrayList<String> myDataset) {
-        mDataset = myDataset;
+    public MatchFaceRecyclerViewAdapter(MatchFaceActivity activity, RealmResults<Teacher> data) {
+        super(data, true);
+        this.activity = activity;
     }
 
     @Override
@@ -45,17 +36,26 @@ public class MatchFaceRecyclerViewAdapter extends RecyclerView.Adapter<MatchFace
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
+        Teacher obj = getData().get(position);
         holder.cardText1.setText(String.valueOf(position));
-        holder.cardText1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Snackbar.make(v,mDataset.get(position),Snackbar.LENGTH_SHORT).show();
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return mDataset.size();
+        return getData().size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        // each data item is just a string in this case
+        public TextView cardText1;
+        public ImageView cardImage;
+        public ImageView cardShare;
+
+        public ViewHolder(View v) {
+            super(v);
+            cardText1 = (TextView) v.findViewById(R.id.profile_card_text1);
+            cardImage = (ImageView) v.findViewById(R.id.profile_card_img);
+            cardShare = (ImageView) v.findViewById(R.id.profile_card_share);
+        }
     }
 }
