@@ -17,6 +17,7 @@ import org.danico.whoru.MyFavsRecyclerViewAdapter;
 import org.danico.whoru.R;
 import org.danico.whoru.Teacher;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
