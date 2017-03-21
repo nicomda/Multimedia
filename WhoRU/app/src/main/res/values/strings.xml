@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">WhoRU</string>
 
+    <!-- KAIROS API CONFIG VALUES -->
+    <string name="kairos_app_id">39c84c59</string>
+    <string name="kairos_api_key">65faed2825dc880d0fcdcf82e1173cb7</string>
+    <string name="kairos_gallery_id">teachers</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_apiconfig">APIConfigActivity</string>
+    <string name="title_activity_apiadd_teacher">APIAddTeacherActivity</string>
+    <string name="title_activity_apilist_gallery">APIListGallery</string>
 </resources>

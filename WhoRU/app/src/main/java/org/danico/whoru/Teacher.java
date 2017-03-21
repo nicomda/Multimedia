@@ -15,7 +15,7 @@ import io.realm.annotations.PrimaryKey;
 public class Teacher extends RealmObject {
     public static final String ID = "id", NAME = "name", FAV = "fav";
     @PrimaryKey
-    public String id;
+    private String id;
     private String name;
     private String department;
     private String office;
@@ -26,17 +26,19 @@ public class Teacher extends RealmObject {
     private Boolean fav;
     private byte[] image;
 
-    public Teacher(String name, String department, String office, String email, String twitter, String web, String additional_info, Boolean fav, Bitmap bm) {
+    public Teacher(String name, String department, String office, String email, String twitter, String web, String additional_info, Bitmap bm) {
         id = "T-" + UUID.randomUUID().toString();
-        name = this.name;
-        department = this.department;
-        office = this.office;
-        email = this.email;
-        twitter = this.twitter;
-        web = this.web;
-        additional_info = this.additional_info;
-        fav = false;
-        setImage(bitmapToByteArray(bm));
+        this.name = name;
+        this.department = department;
+        this.office = office;
+        this.email = email;
+        this.twitter = twitter;
+        this.web = web;
+        this.additional_info = additional_info;
+        this.fav = false;
+        if (bm != null) {
+            setImage(bitmapToByteArray(bm));
+        } else image = null;
     }
 
     public Teacher(Teacher teacher) {

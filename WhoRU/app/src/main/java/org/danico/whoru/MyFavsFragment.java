@@ -45,6 +45,13 @@ public class MyFavsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_myfavs, container, false);
+        final Teacher teacher = new Teacher("Alonso", "", "", "", "", "", "", null);
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                realm.copyToRealm(teacher);
+            }
+        });
         mRecyclerView=(RecyclerView)rootView.findViewById(R.id.recyclerview_myfavs);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager=new LinearLayoutManager(getContext());

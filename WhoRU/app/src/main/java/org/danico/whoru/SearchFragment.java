@@ -2,6 +2,7 @@ package org.danico.whoru;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.lapism.searchview.SearchView;
+
+import org.danico.whoru.API.APIConfigActivity;
+
 import io.realm.Realm;
 
 
@@ -41,7 +47,22 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView= inflater.inflate(R.layout.fragment_search, container, false);
         setUpRecyclerView(rootView);
+        SearchView search = (SearchView) rootView.findViewById(R.id.searchView);
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
 
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.contains("apiconfig")) {
+                    Intent i = new Intent(getActivity(), APIConfigActivity.class);
+                    startActivity(i);
+                }
+                return false;
+            }
+        });
         return rootView;
     }
     // TODO: Rename method, update argument and hook method into UI event

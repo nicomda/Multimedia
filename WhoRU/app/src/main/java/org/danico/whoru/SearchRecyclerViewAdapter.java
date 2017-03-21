@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -36,8 +37,9 @@ public class SearchRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher,
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Teacher obj = getData().get(position);
-        holder.cardText.setText(obj.getName());
+        Teacher teacher = getItem(position);
+        Toast.makeText(fragment.getContext(), teacher.getId(), Toast.LENGTH_SHORT).show();
+        holder.cardText.setText(teacher.getName().toString());
     }
 
     @Override

@@ -3,21 +3,24 @@
     package="org.danico.whoru">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
         android:configChanges="orientation"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name="MyApp"
-        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.AppBarOverlay">
-        <activity android:name=".SliderPagerActivity"
+        <activity
+            android:name=".SliderPagerActivity"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,6 +32,18 @@
             android:name=".MatchFaceActivity"
             android:label="MatchFace"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".API.APIConfigActivity"
+            android:label="@string/title_activity_apiconfig"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".API.APIAddTeacherActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:label="@string/title_activity_apiadd_teacher" />
+        <activity
+            android:name=".API.APIListGallery"
+            android:theme="@style/AppTheme"
+            android:label="@string/title_activity_apilist_gallery"></activity>
     </application>
 
 </manifest>
