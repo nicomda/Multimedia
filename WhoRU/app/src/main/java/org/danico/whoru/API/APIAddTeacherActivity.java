@@ -87,6 +87,7 @@ public class APIAddTeacherActivity extends AppCompatActivity {
                 Log.d("KAIROS DEMO", s);
                 button_send.setTextColor(getResources().getColor(android.R.color.holo_green_light));
                 button_send.setText("Success!!");
+                button_send.setEnabled(false);
 
             }
 

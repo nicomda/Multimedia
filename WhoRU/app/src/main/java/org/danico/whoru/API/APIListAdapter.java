@@ -76,6 +76,7 @@ public class APIListAdapter extends RecyclerView.Adapter<APIListAdapter.ViewHold
 
                     myKairos.deleteSubject(mDataset.get(position), v.getContext().getString(R.string.kairos_gallery_id), kListener);
                     mDataset.remove(position);
+                    notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 } catch (UnsupportedEncodingException e) {

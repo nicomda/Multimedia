@@ -11,4 +11,5 @@
     <string name="title_activity_apiconfig">APIConfigActivity</string>
     <string name="title_activity_apiadd_teacher">APIAddTeacherActivity</string>
     <string name="title_activity_apilist_gallery">APIListGallery</string>
+    <string name="title_activity_add_teacher">AddTeacherActivity</string>
 </resources>

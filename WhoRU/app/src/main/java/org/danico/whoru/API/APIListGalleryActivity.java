@@ -60,7 +60,7 @@ public class APIListGalleryActivity extends AppCompatActivity {
                 setUpRecyclerView();
                 if (s.contains("successfully removed")) {
                     Toast.makeText(getApplicationContext(), "Deleted from Teachers", Toast.LENGTH_SHORT).show();
-                    mAdapter.notifyDataSetChanged();
+                    finish();
                 }
             }
 
