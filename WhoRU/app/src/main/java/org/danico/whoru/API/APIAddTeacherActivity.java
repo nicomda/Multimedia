@@ -49,7 +49,6 @@ public class APIAddTeacherActivity extends AppCompatActivity {
         if (bitmap != null) {
             button_send.setEnabled(true);
         }
-        // TODO do something with the bitmap
     }
 
     void setUpListeners() {

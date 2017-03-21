@@ -39,13 +39,14 @@
         <activity
             android:name=".API.APIAddTeacherActivity"
             android:label="@string/title_activity_apiadd_teacher"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".API.APIListGalleryActivity"
             android:label="@string/title_activity_apilist_gallery"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".AddTeacherActivity"
+            android:theme="@style/AppTheme"
             android:label="@string/title_activity_add_teacher"></activity>
     </application>
 
