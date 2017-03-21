@@ -37,9 +37,14 @@ public class SearchRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher,
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Teacher teacher = getItem(position);
-        Toast.makeText(fragment.getContext(), teacher.getId(), Toast.LENGTH_SHORT).show();
+        final Teacher teacher = getItem(position);
         holder.cardText.setText(teacher.getName().toString());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(fragment.getContext(), teacher.getId(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
