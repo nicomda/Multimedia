@@ -37,6 +37,7 @@ public class AddTeacherActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.add_teacher_toolbar);
         toolbar.setTitle("Add teacher to Realm");
         setSupportActionBar(toolbar);
+        setUpListeners();
     }
 
     @Override
@@ -49,7 +50,7 @@ public class AddTeacherActivity extends AppCompatActivity {
     }
 
     void setUpListeners() {
-        imgview = (ImageView) findViewById(R.id.add_teacher_name);
+        imgview = (ImageView) findViewById(R.id.add_teacher_imgView);
         button_pickimg = (Button) findViewById(R.id.add_teacher_pickimg);
         button_send = (Button) findViewById(R.id.add_teacher_save);
         name = (EditText) findViewById(R.id.add_teacher_name);
@@ -65,6 +66,7 @@ public class AddTeacherActivity extends AppCompatActivity {
                 ImagePicker.pickImage(AddTeacherActivity.this, "Select your image: ");
             }
         });
+        button_send.setEnabled(false);
         button_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

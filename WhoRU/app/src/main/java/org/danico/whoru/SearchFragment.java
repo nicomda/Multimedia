@@ -60,6 +60,10 @@ public class SearchFragment extends Fragment {
                     Intent i = new Intent(getActivity(), APIConfigActivity.class);
                     startActivity(i);
                 }
+                if (newText.contains("addteacher")) {
+                    Intent i = new Intent(getActivity(), AddTeacherActivity.class);
+                    startActivity(i);
+                }
                 return false;
             }
         });

@@ -22,7 +22,6 @@ public class MyApp extends Application {
         super.onCreate();
         Realm.init(this);
         RealmConfiguration realmConfig = new RealmConfiguration.Builder().build();
-        Realm.deleteRealm(realmConfig); // Delete Realm between app restarts.
         Realm.setDefaultConfiguration(realmConfig);
     }
 
