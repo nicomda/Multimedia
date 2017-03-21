@@ -41,7 +41,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:label="@string/title_activity_apiadd_teacher" />
         <activity
-            android:name=".API.APIListGallery"
+            android:name=".API.APIListGalleryActivity"
             android:theme="@style/AppTheme"
             android:label="@string/title_activity_apilist_gallery"></activity>
     </application>
