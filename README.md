@@ -14,7 +14,7 @@ Repo for the media project
   Additional info(OPTIONAL)
   
   
-- DB To store teacher info (With Realm.io)
+- DB To store teacher info (With Realm.io) **DONE**
 - Training IA
-- API Class
-- JSON Class (with GSON)
+- API Class **DONE**
+- JSON Class (with GSON) **DONE**
