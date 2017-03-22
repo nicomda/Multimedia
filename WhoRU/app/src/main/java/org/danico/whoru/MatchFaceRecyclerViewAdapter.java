@@ -1,11 +1,17 @@
 package org.danico.whoru;
 
+import android.content.Context;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
+
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
@@ -13,33 +19,10 @@ import io.realm.RealmResults;
  * Created by nicomda on 1/3/17.
  */
 
-public class MatchFaceRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher, MatchFaceRecyclerViewAdapter.ViewHolder> {
+public class MatchFaceRecyclerViewAdapter extends RecyclerView.Adapter<MatchFaceRecyclerViewAdapter.ViewHolder> {
 
-    private final MatchFaceActivity activity;
-
-
-    public MatchFaceRecyclerViewAdapter(MatchFaceActivity activity, RealmResults<Teacher> data) {
-        super(data, true);
-        this.activity = activity;
-    }
-
-    @Override
-    public MatchFaceRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.match_face_cardview_social,parent, false);
-        ViewHolder vh= new ViewHolder(v);
-        return vh;
-    }
-
-    @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-        Teacher obj = getData().get(position);
-        holder.cardText1.setText(String.valueOf(position));
-    }
-
-    @Override
-    public int getItemCount() {
-        return getData().size();
-    }
+    private ArrayList<TeacherData> data;
+    private Context context;
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         // each data item is just a string in this case
@@ -54,4 +37,46 @@ public class MatchFaceRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teach
             cardShare = (ImageView) v.findViewById(R.id.profile_card_share);
         }
     }
+
+
+    public MatchFaceRecyclerViewAdapter(Context context, ArrayList<TeacherData> data) {
+        this.data = data;
+        this.context = context;
+    }
+
+    @Override
+    public MatchFaceRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.match_face_cardview_social,parent, false);
+        ViewHolder vh= new ViewHolder(v);
+        return vh;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final int position) {
+        holder.cardText1.setText(data.get(position).getInfo());
+        switch (data.get(position).getType()) {
+            case DEPARTMENT:
+                holder.cardImage.setImageDrawable(context.getResources().getDrawable(R.drawable.profile_department));
+                break;
+            case OFFICE:
+                holder.cardImage.setImageDrawable(context.getResources().getDrawable(R.drawable.profile_office));
+                break;
+            case MAIL:
+                holder.cardImage.setImageDrawable(context.getResources().getDrawable(R.drawable.profile_card_email));
+                break;
+            case TWITTER:
+                holder.cardImage.setImageDrawable(context.getResources().getDrawable(R.drawable.profile_card_twitter));
+                break;
+            case WEBSITE:
+                holder.cardImage.setImageDrawable(context.getResources().getDrawable(R.drawable.profile_card_website));
+                break;
+        }
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
 }

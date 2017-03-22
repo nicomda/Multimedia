@@ -225,8 +225,9 @@ public class FaceRecognitionFragment extends Fragment {
             public void onSuccess(String s) {
                 teacher = gson.fromJson(s, APIRecognizedTeacher.class);
                 if (teacher.getImages() != null) {
-                    Toast.makeText(getContext(), "Teacher: " + teacher.getImages().get(0).getTransaction().getSubjectId() +
-                            "\nConfidence:" + teacher.getImages().get(0).getTransaction().getConfidence(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), "Teacher: " + teacher.getImages().get(0).getTransaction().getSubjectId() +
+                    //        "\nConfidence:" + teacher.getImages().get(0).getTransaction().getConfidence(), Toast.LENGTH_SHORT).show();
+                    startMatchFaceActivity();
                 }
                 Log.d("KAIROS DEMO", s);
 
@@ -253,5 +254,11 @@ public class FaceRecognitionFragment extends Fragment {
             width = (int) (height * bitmapRatio);
         }
         return Bitmap.createScaledBitmap(image, width, height, true);
+    }
+
+    public void startMatchFaceActivity() {
+        Intent i = new Intent(getActivity(), MatchFaceActivity.class);
+        i.putExtra("subject_id", teacher.getImages().get(0).getTransaction().getSubjectId());
+        startActivity(i);
     }
 }
