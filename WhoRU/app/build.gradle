@@ -39,7 +39,6 @@ dependencies {
     compile 'com.lapism:searchview:4.0'
     compile 'com.github.Mariovc:ImagePicker:1.0.5'
     compile 'de.hdodenhof:circleimageview:2.1.0'
-    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'io.realm:android-adapters:2.0.0'
     compile 'com.google.code.gson:gson:2.8.0'
     testCompile 'junit:junit:4.12'

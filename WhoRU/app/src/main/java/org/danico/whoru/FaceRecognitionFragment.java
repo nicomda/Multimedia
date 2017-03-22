@@ -26,12 +26,8 @@ import com.kairos.Kairos;
 import com.kairos.KairosListener;
 
 import org.danico.whoru.API.APIRecognizedTeacher;
-import org.greenrobot.eventbus.EventBus;
 import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
 
 import static android.content.ContentValues.TAG;
@@ -108,6 +104,13 @@ public class FaceRecognitionFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        camera.start();
+    }
+
+    @Override
+    public void onPause() {
+        camera.stop();
+        super.onPause();
     }
 
     public interface OnFragmentInteractionListener {

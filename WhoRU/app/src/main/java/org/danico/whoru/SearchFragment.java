@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,9 @@ public class SearchFragment extends Fragment {
                 if (newText.contains("addteacher")) {
                     Intent i = new Intent(getActivity(), AddTeacherActivity.class);
                     startActivity(i);
+                }
+                if (newText.contains("realmpath")) {
+                    Log.d("REALM", "path: " + realm.getPath());
                 }
                 return false;
             }
