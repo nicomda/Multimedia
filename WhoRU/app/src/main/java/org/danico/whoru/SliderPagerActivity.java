@@ -41,6 +41,7 @@ public class SliderPagerActivity extends FragmentActivity
         viewPager.setAdapter(adapter);
         viewPagerTab=(SmartTabLayout) findViewById(R.id.viewpagertab);
         viewPagerTab.setViewPager(viewPager);
+        viewPager.setCurrentItem(1);
 
 
     }

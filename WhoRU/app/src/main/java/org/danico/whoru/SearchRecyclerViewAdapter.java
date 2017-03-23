@@ -1,17 +1,13 @@
 package org.danico.whoru;
 
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import io.realm.RealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
@@ -39,10 +35,13 @@ public class SearchRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher,
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final Teacher teacher = getItem(position);
         holder.cardText.setText(teacher.getName().toString());
+        holder.cardImage.setImageDrawable(holder.cardImage.getContext().getResources().getDrawable(R.drawable.profile_card_uja));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(fragment.getContext(), teacher.getId(), Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(v.getContext(), MatchFaceActivity.class);
+                i.putExtra("subject_id", teacher.getName());
+                v.getContext().startActivity(i);
             }
         });
     }

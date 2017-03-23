@@ -18,6 +18,7 @@ import com.lapism.searchview.SearchView;
 import org.danico.whoru.API.APIConfigActivity;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 
 public class SearchFragment extends Fragment {
@@ -43,18 +44,22 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView= inflater.inflate(R.layout.fragment_search, container, false);
         setUpRecyclerView(rootView);
         SearchView search = (SearchView) rootView.findViewById(R.id.searchView);
+        //To use search you have to install Google App.
+        //search.setVoice(false);
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                RealmResults queryResults = realm.where(Teacher.class).beginsWith(Teacher.NAME, query).findAllSorted(Teacher.NAME);
+                mAdapter = new SearchRecyclerViewAdapter(SearchFragment.this, queryResults);
+                mRecyclerView.setAdapter(mAdapter);
                 return false;
             }
 
+            //DEV SETTINGS ACCESS
             @Override
             public boolean onQueryTextChange(String newText) {
                 if (newText.contains("apiconfig")) {

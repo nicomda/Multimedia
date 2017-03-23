@@ -1,6 +1,6 @@
 package org.danico.whoru;
 
-import android.support.design.widget.Snackbar;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,9 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
-import io.realm.RealmCollection;
 import io.realm.RealmRecyclerViewAdapter;
 import io.realm.RealmResults;
 
@@ -36,8 +33,17 @@ public class MyFavsRecyclerViewAdapter extends RealmRecyclerViewAdapter<Teacher,
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Teacher obj = getData().get(position);
-        holder.cardText.setText(obj.getName());
+        final Teacher teacher = getData().get(position);
+        holder.cardText.setText(teacher.getName());
+        holder.cardImage.setImageDrawable(holder.cardImage.getContext().getResources().getDrawable(R.drawable.profile_card_uja));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(v.getContext(), MatchFaceActivity.class);
+                i.putExtra("subject_id", teacher.getName());
+                v.getContext().startActivity(i);
+            }
+        });
     }
 
     @Override
