@@ -34,18 +34,6 @@
             android:elevation="4dp"
             android:src="@drawable/facial_recon_icon" />
 
-        <ImageView
-            android:id="@+id/identify_match_face"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginRight="16dp"
-            android:elevation="4dp"
-            android:src="@drawable/facial_recon_icon" />
-
 
         <ImageView
             android:id="@+id/identify_ic_camera_flip"

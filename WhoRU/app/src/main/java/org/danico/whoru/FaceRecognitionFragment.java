@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -128,16 +127,6 @@ public class FaceRecognitionFragment extends Fragment {
                 camera.takePicture();
             }
         });
-        //Provisional Profile Access Button
-        button_small_example=(ImageView)view.findViewById(R.id.identify_match_face);
-        button_small_example.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(getActivity(),MatchFaceActivity.class);
-                startActivity(i);
-            }
-        });
-
 
         //Flip camera button listener
         button_camera_flip = (ImageView) view.findViewById(R.id.identify_ic_camera_flip);
