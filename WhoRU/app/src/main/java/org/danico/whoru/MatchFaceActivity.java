@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -82,7 +81,6 @@ public class MatchFaceActivity extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        //TODO Modify query here to get just 1 teacher to show on RecyclerView
         mAdapter = new MatchFaceRecyclerViewAdapter(getApplicationContext(), dataset);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -94,7 +92,6 @@ public class MatchFaceActivity extends AppCompatActivity {
         Bitmap bitmap = BitmapFactory.decodeByteArray(teacher.getImage(), 0, teacher.getImage().length);
         profile_img.setImageBitmap(bitmap);
         profile_name.setText(teacher.getName());
-        Toast.makeText(getApplicationContext(), String.valueOf(teacher.isFav()), Toast.LENGTH_SHORT).show();
         if (teacher.isFav()) {
             button_fav.setImageDrawable(getApplicationContext().getResources().getDrawable(R.drawable.star));
         } else
