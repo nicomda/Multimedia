@@ -3,7 +3,6 @@ package org.danico.whoru.API;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
