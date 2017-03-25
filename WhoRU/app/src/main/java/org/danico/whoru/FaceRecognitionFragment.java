@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.google.android.cameraview.CameraView;
 import com.google.gson.Gson;
@@ -39,7 +38,6 @@ public class FaceRecognitionFragment extends Fragment {
     private ImageView button_camera_flip;
     private ImageView button_camera_flash;
     private ImageView button_recon;
-    private ImageView button_small_example;
     private CameraView camera;
     private final int PERMISSION_REQUEST_CAMERA = 1;
     private Bitmap bitmap;
@@ -67,13 +65,13 @@ public class FaceRecognitionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView =inflater.inflate(R.layout.fragment_face_recognition, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_face_recognition, container, false);
         setUpButtonsListeners(rootView);
         camera=(CameraView)rootView.findViewById(R.id.camera);
         askForCameraPermission();
         gson = new Gson();
         camera.addCallback(mCallback);
-        setUpKairos(rootView);
+        setUpKairos();
         return rootView;
     }
 
@@ -124,7 +122,7 @@ public class FaceRecognitionFragment extends Fragment {
         button_recon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Picture Taken", Toast.LENGTH_SHORT).show();
+                Snackbar.make(view, "Picture Taken", Snackbar.LENGTH_SHORT).show();
                 camera.takePicture();
             }
         });
@@ -191,8 +189,6 @@ public class FaceRecognitionFragment extends Fragment {
         @Override
         public void onPictureTaken(CameraView cameraView, final byte[] data) {
             Log.d(TAG, "onPictureTaken " + data.length);
-            Toast.makeText(cameraView.getContext(), "Picture Taken", Toast.LENGTH_SHORT)
-                    .show();
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             bitmap = getResizedBitmap(bitmap, 500);
             try {
@@ -207,7 +203,7 @@ public class FaceRecognitionFragment extends Fragment {
 
     };
 
-    void setUpKairos(final View rootView) {
+    void setUpKairos() {
         myKairos = new Kairos();
         myKairos.setAuthentication(getContext(), getString(R.string.kairos_app_id), getString(R.string.kairos_api_key));
         kListener = new KairosListener() {
@@ -217,17 +213,17 @@ public class FaceRecognitionFragment extends Fragment {
                 if (s.contains("Errors")) {
                     APIError error = gson.fromJson(s, APIError.class);
                     if (error.getErrors().get(0).getErrCode() == 5004) {
-                        Snackbar.make(rootView, "Gallery name not found", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(button_recon, "Gallery name not found", Snackbar.LENGTH_SHORT).show();
                     }
                     if (error.getErrors().get(0).getErrCode() == 5002) {
-                        Snackbar.make(rootView, "No faces in the image", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(button_recon, "No faces in the image", Snackbar.LENGTH_SHORT).show();
                     } else
-                        Snackbar.make(rootView, "Unexpected: " + error.getErrors().get(0).getMessage(), Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(button_recon, "Unexpected: " + error.getErrors().get(0).getMessage(), Snackbar.LENGTH_SHORT).show();
                 } else {
                     teacher = gson.fromJson(s, APIRecognizedTeacher.class);
 
                     if (s.contains("failure")) {
-                        Snackbar.make(rootView, "No matches found", Snackbar.LENGTH_SHORT).show();
+                        Snackbar.make(button_recon, "No matches found", Snackbar.LENGTH_SHORT).show();
                     } else startMatchFaceActivity();
                 }
 
@@ -238,7 +234,7 @@ public class FaceRecognitionFragment extends Fragment {
             @Override
             public void onFail(String s) {
                 Log.d("KAIROS DEMO", s);
-                Snackbar.make(rootView, "Error on API connection", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(button_recon, "Error on API connection", Snackbar.LENGTH_SHORT).show();
             }
         };
     }

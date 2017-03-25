@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+    app:theme="@style/Theme.AppCompat.NoActionBar"
     tools:context="org.danico.whoru.FaceRecognitionFragment">
 
     <com.google.android.cameraview.CameraView
@@ -16,23 +18,11 @@
         app:aspectRatio="16:9"
         app:autoFocus="true"
         app:facing="back"
-        app:flash="auto" />
-
+        app:flash="auto"></com.google.android.cameraview.CameraView>
     <RelativeLayout
         android:id="@+id/relative_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-
-        <ImageView
-            android:id="@+id/identify_capture"
-            android:layout_width="72dp"
-            android:layout_height="72dp"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:elevation="4dp"
-            android:src="@drawable/facial_recon_icon" />
 
 
         <ImageView
@@ -55,8 +45,25 @@
             android:elevation="4dp"
             android:src="@drawable/flash_auto" />
 
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <ImageView
+                android:id="@+id/identify_capture"
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="16dp"
+                android:elevation="4dp"
+                android:src="@drawable/facial_recon_icon"
+                app:layout_behavior="org.danico.whoru.SnackBarBehavior" />
+        </android.support.design.widget.CoordinatorLayout>
 
     </RelativeLayout>
-
 
 </FrameLayout>
