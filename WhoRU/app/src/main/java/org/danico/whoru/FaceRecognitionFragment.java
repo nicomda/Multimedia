@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.kairos.Kairos;
 import com.kairos.KairosListener;
 
+import org.danico.whoru.API.APIError;
 import org.danico.whoru.API.APIRecognizedTeacher;
 import org.json.JSONException;
 
@@ -72,7 +73,7 @@ public class FaceRecognitionFragment extends Fragment {
         askForCameraPermission();
         gson = new Gson();
         camera.addCallback(mCallback);
-        setUpKairos();
+        setUpKairos(rootView);
         return rootView;
     }
 
@@ -206,18 +207,30 @@ public class FaceRecognitionFragment extends Fragment {
 
     };
 
-    void setUpKairos() {
+    void setUpKairos(final View rootView) {
         myKairos = new Kairos();
         myKairos.setAuthentication(getContext(), getString(R.string.kairos_app_id), getString(R.string.kairos_api_key));
         kListener = new KairosListener() {
             @Override
             public void onSuccess(String s) {
-                teacher = gson.fromJson(s, APIRecognizedTeacher.class);
-                if (teacher.getImages() != null) {
-                    //Toast.makeText(getContext(), "Teacher: " + teacher.getImages().get(0).getTransaction().getSubjectId() +
-                    //        "\nConfidence:" + teacher.getImages().get(0).getTransaction().getConfidence(), Toast.LENGTH_SHORT).show();
-                    startMatchFaceActivity();
+                //Controlling error cases
+                if (s.contains("Errors")) {
+                    APIError error = gson.fromJson(s, APIError.class);
+                    if (error.getErrors().get(0).getErrCode() == 5004) {
+                        Snackbar.make(rootView, "Gallery name not found", Snackbar.LENGTH_SHORT).show();
+                    }
+                    if (error.getErrors().get(0).getErrCode() == 5002) {
+                        Snackbar.make(rootView, "No faces in the image", Snackbar.LENGTH_SHORT).show();
+                    } else
+                        Snackbar.make(rootView, "Unexpected: " + error.getErrors().get(0).getMessage(), Snackbar.LENGTH_SHORT).show();
+                } else {
+                    teacher = gson.fromJson(s, APIRecognizedTeacher.class);
+
+                    if (s.contains("failure")) {
+                        Snackbar.make(rootView, "No matches found", Snackbar.LENGTH_SHORT).show();
+                    } else startMatchFaceActivity();
                 }
+
                 Log.d("KAIROS DEMO", s);
 
             }
@@ -225,7 +238,7 @@ public class FaceRecognitionFragment extends Fragment {
             @Override
             public void onFail(String s) {
                 Log.d("KAIROS DEMO", s);
-
+                Snackbar.make(rootView, "Error on API connection", Snackbar.LENGTH_SHORT).show();
             }
         };
     }
