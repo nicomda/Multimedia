@@ -29,6 +29,8 @@ import org.json.JSONException;
 
 import java.io.UnsupportedEncodingException;
 
+import me.zhanghai.android.materialprogressbar.MaterialProgressBar;
+
 import static android.content.ContentValues.TAG;
 
 
@@ -39,6 +41,7 @@ public class FaceRecognitionFragment extends Fragment {
     private ImageView button_camera_flash;
     private ImageView button_recon;
     private CameraView camera;
+    private MaterialProgressBar pbar;
     private final int PERMISSION_REQUEST_CAMERA = 1;
     private Bitmap bitmap;
     private Kairos myKairos;
@@ -116,16 +119,11 @@ public class FaceRecognitionFragment extends Fragment {
     }
 
     public void setUpButtonsListeners(View view) {
-
+        pbar = (MaterialProgressBar) view.findViewById(R.id.identify_pbar);
         //FAB Shoot camera listener
         button_recon = (ImageView) view.findViewById(R.id.identify_capture);
-        button_recon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Picture Taken", Snackbar.LENGTH_SHORT).show();
-                camera.takePicture();
-            }
-        });
+        //Encapsulated to deactivate while waiting for recog result
+        enableRecogButtonListener();
 
         //Flip camera button listener
         button_camera_flip = (ImageView) view.findViewById(R.id.identify_ic_camera_flip);
@@ -192,6 +190,8 @@ public class FaceRecognitionFragment extends Fragment {
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             bitmap = getResizedBitmap(bitmap, 500);
             try {
+                button_recon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.facial_recon_disabled));
+                button_recon.setOnClickListener(null);
                 myKairos.recognize(bitmap, getString(R.string.kairos_gallery_id), null, null, null, "1", kListener);
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -226,7 +226,8 @@ public class FaceRecognitionFragment extends Fragment {
                         Snackbar.make(button_recon, "No matches found", Snackbar.LENGTH_SHORT).show();
                     } else startMatchFaceActivity();
                 }
-
+                pbar.setVisibility(View.INVISIBLE);
+                enableRecogButtonListener();
                 Log.d("KAIROS DEMO", s);
 
             }
@@ -234,6 +235,8 @@ public class FaceRecognitionFragment extends Fragment {
             @Override
             public void onFail(String s) {
                 Log.d("KAIROS DEMO", s);
+                pbar.setVisibility(View.INVISIBLE);
+                enableRecogButtonListener();
                 Snackbar.make(button_recon, "Error on API connection", Snackbar.LENGTH_SHORT).show();
             }
         };
@@ -258,5 +261,17 @@ public class FaceRecognitionFragment extends Fragment {
         Intent i = new Intent(getActivity(), MatchFaceActivity.class);
         i.putExtra("subject_id", teacher.getImages().get(0).getTransaction().getSubjectId());
         startActivity(i);
+    }
+
+    public void enableRecogButtonListener() {
+        button_recon.setImageDrawable(getContext().getResources().getDrawable(R.drawable.facial_recon_icon));
+        button_recon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Picture Taken", Snackbar.LENGTH_SHORT).show();
+                camera.takePicture();
+                pbar.setVisibility(View.VISIBLE);
+            }
+        });
     }
 }

@@ -11,11 +11,11 @@ import android.widget.ImageView;
  * Created by nicomda on 25/3/17.
  */
 
-public class SnackBarBehavior extends CoordinatorLayout.Behavior<ImageView> {
-    public SnackBarBehavior() {
+public class SnackBarBehaviorImgView extends CoordinatorLayout.Behavior<ImageView> {
+    public SnackBarBehaviorImgView() {
     }
 
-    public SnackBarBehavior(Context context, AttributeSet attrs) {
+    public SnackBarBehaviorImgView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
