@@ -10,6 +10,7 @@ public class APIRecognizedTeacher {
 
     @SerializedName("images")
     @Expose
+
     private List<Image> images = null;
 
     public List<Image> getImages() {
