@@ -3,7 +3,6 @@ package org.danico.whoru;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -85,6 +84,7 @@ public class AddTeacherActivity extends AppCompatActivity {
                         realm.copyToRealm(teacher);
                     }
                 });
+                v.setBackgroundColor(getResources().getColor(android.R.color.holo_green_light));
             }
         });
 

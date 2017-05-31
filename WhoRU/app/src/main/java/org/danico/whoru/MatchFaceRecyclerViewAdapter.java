@@ -1,8 +1,6 @@
 package org.danico.whoru;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-
-import io.realm.RealmRecyclerViewAdapter;
-import io.realm.RealmResults;
 
 /**
  * Created by nicomda on 1/3/17.
@@ -34,7 +29,6 @@ public class MatchFaceRecyclerViewAdapter extends RecyclerView.Adapter<MatchFace
             super(v);
             cardText1 = (TextView) v.findViewById(R.id.profile_card_text1);
             cardImage = (ImageView) v.findViewById(R.id.profile_card_img);
-            cardShare = (ImageView) v.findViewById(R.id.profile_card_share);
         }
     }
 
