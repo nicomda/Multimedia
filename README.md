@@ -1,8 +1,8 @@
-# multimedia
-Repo for the media project
+# Who Are you
+Project developing an Android App related to Face Recognition using Kairos API. The app give you the information related to a teacher just taking a photograph or by looking at its own browser.
 
 ## TODO
-- Class Teacher
+- Class Teacher **DONE**
   -ID
   -Name
   -Department
@@ -11,7 +11,7 @@ Repo for the media project
   -twitter
   -web
   -email
-  Additional info(OPTIONAL)
+  Additional info(OPTIONAL) **DONE**
   
   
 - DB To store teacher info (With Realm.io) **DONE**
